@@ -90,6 +90,7 @@ export type Project = {
   demoUrl?: string;
   architecture?: string;
   dataStructures?: string[];
+  screenshots?: { url: string; caption?: string }[];
   flows: { name: string; steps: string[] }[];
 };
 
@@ -129,6 +130,16 @@ export const projects: Project[] = [
     isGroupProject: false,
     githubUrl: "https://github.com/hrishi1314/AI-Chatbot-",
     demoUrl: "[ADD_DEMO_URL]",
+    screenshots: [
+      {
+        url: "/projects/ai-recommender/screenshot-1.jpeg",
+        caption: "Recommendation Interface & Filtering",
+      },
+      {
+        url: "/projects/ai-recommender/screenshot-2.jpeg",
+        caption: "Personalized Product Guidance & Comparisons",
+      },
+    ],
     flows: [
       {
         name: "Recommendation Flow",
@@ -189,6 +200,32 @@ export const projects: Project[] = [
       "Priority Queue — priority-based waiting list (e.g., reserved/faculty)",
       "Stack — borrowing history (LIFO access)",
       "ArrayList — dynamic member and book collections",
+    ],
+    screenshots: [
+      {
+        url: "/projects/library-management/screenshot-1.png",
+        caption: "Library Management Dashboard & Catalog",
+      },
+      {
+        url: "/projects/library-management/screenshot-2.png",
+        caption: "Book Issue & Return Interface",
+      },
+      {
+        url: "/projects/library-management/screenshot-3.png",
+        caption: "Priority Queue Waitlist & Allocation",
+      },
+      {
+        url: "/projects/library-management/screenshot-4.png",
+        caption: "Member Registry & Borrowing Records",
+      },
+      {
+        url: "/projects/library-management/screenshot-5.png",
+        caption: "Fine Calculation & Transaction History",
+      },
+      {
+        url: "/projects/library-management/screenshot-6.png",
+        caption: "Leaderboard & Reporting Engine",
+      },
     ],
     flows: [
       {

@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { GitHubIcon } from "@/components/SocialIcons";
 import type { Project } from "@/data/portfolio";
+import Image from "next/image";
 
 interface ProjectDetailsProps {
   project: Project | null;
@@ -421,6 +422,69 @@ export default function ProjectDetails({
                   </ol>
                 </Section>
               ))}
+
+              {/* Screenshots */}
+              <Section title="Screenshots">
+                {project.screenshots && project.screenshots.length > 0 ? (
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+                      gap: "16px",
+                    }}
+                  >
+                    {project.screenshots.map((s, idx) => (
+                      <div
+                        key={idx}
+                        style={{
+                          borderRadius: "10px",
+                          overflow: "hidden",
+                          border: "1px solid var(--border)",
+                          background: "var(--bg-secondary)",
+                        }}
+                      >
+                        <div style={{ position: "relative", width: "100%", aspectRatio: "16/9" }}>
+                          <Image
+                            src={s.url}
+                            alt={s.caption || `${project.title} screenshot ${idx + 1}`}
+                            fill
+                            style={{ objectFit: "cover" }}
+                            sizes="(max-width: 768px) 100vw, 400px"
+                            quality={90}
+                          />
+                        </div>
+                        {s.caption && (
+                          <div style={{ padding: "10px 14px", borderTop: "1px solid var(--border)" }}>
+                            <p style={{ fontSize: "0.78rem", color: "var(--text-secondary)" }}>
+                              {s.caption}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      padding: "28px 20px",
+                      border: "1px dashed var(--border)",
+                      borderRadius: "10px",
+                      textAlign: "center",
+                      background: "rgba(242, 239, 234, 0.02)",
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: "0.85rem",
+                        color: "var(--text-muted)",
+                        fontFamily: "var(--font-mono)",
+                      }}
+                    >
+                      Screenshots will be added soon
+                    </p>
+                  </div>
+                )}
+              </Section>
 
               {/* Links */}
               <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
