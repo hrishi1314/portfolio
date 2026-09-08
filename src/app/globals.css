@@ -452,3 +452,22 @@ body.cursor-active * { cursor: none !important; }
   }
   html { scroll-behavior: auto; }
 }
+
+/* ============================================================
+   SCREENSHOT THUMBNAIL HOVER
+   ============================================================ */
+/* Show zoom icon on hover */
+[role="button"]:hover .screenshot-zoom-icon,
+[role="button"]:focus-visible .screenshot-zoom-icon {
+  opacity: 1 !important;
+}
+/* Dim overlay slightly on hover */
+[role="button"]:hover .screenshot-overlay,
+[role="button"]:focus-visible .screenshot-overlay {
+  background: rgba(0, 0, 0, 0.28) !important;
+}
+/* Subtle scale on image */
+[role="button"]:hover .screenshot-thumb,
+[role="button"]:focus-visible .screenshot-thumb {
+  transform: scale(1.03);
+}

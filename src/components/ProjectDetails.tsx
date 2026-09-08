@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   X,
   ExternalLink,
   ChevronRight,
   Users,
+  ZoomIn,
 } from "lucide-react";
 import { GitHubIcon } from "@/components/SocialIcons";
 import type { Project } from "@/data/portfolio";
@@ -21,11 +22,17 @@ export default function ProjectDetails({
   project,
   onClose,
 }: ProjectDetailsProps) {
+  const [lightboxScreenshot, setLightboxScreenshot] = useState<{
+    url: string;
+    caption?: string;
+  } | null>(null);
+
+  // Close project modal on Escape — but only when the screenshot lightbox is NOT open
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape" && !lightboxScreenshot) onClose();
     },
-    [onClose]
+    [onClose, lightboxScreenshot]
   );
 
   useEffect(() => {
@@ -441,17 +448,58 @@ export default function ProjectDetails({
                           overflow: "hidden",
                           border: "1px solid var(--border)",
                           background: "var(--bg-secondary)",
+                          cursor: "pointer",
                         }}
+                        onClick={() => setLightboxScreenshot(s)}
+                        role="button"
+                        tabIndex={0}
+                        aria-label={`Expand screenshot: ${s.caption || `${project.title} screenshot ${idx + 1}`}`}
+                        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setLightboxScreenshot(s); }}
                       >
-                        <div style={{ position: "relative", width: "100%", aspectRatio: "16/9" }}>
+                        <div
+                          style={{ position: "relative", width: "100%", aspectRatio: "16/9" }}
+                        >
                           <Image
                             src={s.url}
                             alt={s.caption || `${project.title} screenshot ${idx + 1}`}
                             fill
-                            style={{ objectFit: "cover" }}
+                            style={{ objectFit: "cover", transition: "transform 0.3s ease" }}
                             sizes="(max-width: 768px) 100vw, 400px"
                             quality={90}
+                            className="screenshot-thumb"
                           />
+                          {/* Hover zoom hint */}
+                          <div
+                            aria-hidden="true"
+                            style={{
+                              position: "absolute",
+                              inset: 0,
+                              background: "rgba(0,0,0,0)",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              transition: "background 0.2s",
+                            }}
+                            className="screenshot-overlay"
+                          >
+                            <div
+                              style={{
+                                background: "rgba(0,0,0,0.55)",
+                                backdropFilter: "blur(4px)",
+                                borderRadius: "50%",
+                                width: "44px",
+                                height: "44px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                opacity: 0,
+                                transition: "opacity 0.2s",
+                              }}
+                              className="screenshot-zoom-icon"
+                            >
+                              <ZoomIn size={20} color="white" />
+                            </div>
+                          </div>
                         </div>
                         {s.caption && (
                           <div style={{ padding: "10px 14px", borderTop: "1px solid var(--border)" }}>
@@ -527,11 +575,160 @@ export default function ProjectDetails({
         </motion.div>
       )}
 
-
+      {/* Screenshot lightbox */}
+      <AnimatePresence>
+        {lightboxScreenshot && (
+          <ScreenshotLightbox
+            url={lightboxScreenshot.url}
+            caption={lightboxScreenshot.caption}
+            onClose={() => setLightboxScreenshot(null)}
+          />
+        )}
+      </AnimatePresence>
     </AnimatePresence>
   );
 }
 
+// ── Screenshot Lightbox ───────────────────────────────────────
+function ScreenshotLightbox({
+  url,
+  caption,
+  onClose,
+}: {
+  url: string;
+  caption?: string;
+  onClose: () => void;
+}) {
+  const handleKey = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.stopPropagation(); // prevent project modal from also closing
+        onClose();
+      }
+    },
+    [onClose]
+  );
+
+  useEffect(() => {
+    // Use capture so we intercept before the project-modal's keydown listener
+    window.addEventListener("keydown", handleKey, true);
+    return () => window.removeEventListener("keydown", handleKey, true);
+  }, [handleKey]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={caption || "Screenshot"}
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 9999,
+        background: "rgba(0,0,0,0.88)",
+        backdropFilter: "blur(6px)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "20px",
+      }}
+    >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          position: "relative",
+          maxWidth: "min(92vw, 1100px)",
+          maxHeight: "88vh",
+          borderRadius: "12px",
+          overflow: "hidden",
+          boxShadow: "0 40px 120px rgba(0,0,0,0.7)",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          aria-label="Close screenshot"
+          style={{
+            position: "absolute",
+            top: "12px",
+            right: "12px",
+            zIndex: 10,
+            background: "rgba(0,0,0,0.7)",
+            border: "1px solid rgba(255,255,255,0.15)",
+            borderRadius: "8px",
+            padding: "8px",
+            color: "white",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backdropFilter: "blur(8px)",
+          }}
+        >
+          <X size={18} />
+        </button>
+
+        {/* Full-resolution image — natural size, contained within viewport */}
+        <div
+          style={{
+            position: "relative",
+            width: "min(92vw, 1100px)",
+            aspectRatio: "16/9",
+            maxHeight: caption ? "calc(88vh - 52px)" : "88vh",
+          }}
+        >
+          <Image
+            src={url}
+            alt={caption || "Project screenshot"}
+            fill
+            style={{ objectFit: "contain" }}
+            sizes="(max-width: 768px) 92vw, 1100px"
+            priority
+            quality={95}
+          />
+        </div>
+
+        {/* Caption bar */}
+        {caption && (
+          <div
+            style={{
+              background: "rgba(0,0,0,0.85)",
+              backdropFilter: "blur(12px)",
+              padding: "12px 20px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "16px",
+              flexShrink: 0,
+            }}
+          >
+            <p
+              style={{
+                fontSize: "0.85rem",
+                color: "rgba(255,255,255,0.8)",
+                fontWeight: 500,
+              }}
+            >
+              {caption}
+            </p>
+          </div>
+        )}
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// ── Section wrapper ───────────────────────────────────────────
 function Section({
   title,
   children,
