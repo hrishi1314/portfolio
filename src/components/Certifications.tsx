@@ -18,6 +18,7 @@ const ISSUER_COLORS: Record<string, string> = {
   Skillera: "#8FA68A",   // muted sage — calm contrast
   GeeksForGeeks: "#7D9EA8", // cool slate — readable, professional
   HackerRank: "#A89060",  // warm bronze
+  "Coding Tantra": "#9B8FA8", // muted lavender-slate — distinct but harmonious
 };
 
 function getIssuerColor(issuer: string) {
