@@ -365,6 +365,34 @@ export const certifications: Certification[] = [
 ];
 
 // ============================================================
+// TRAINING
+// ============================================================
+
+export type Training = {
+  id: string;
+  title: string;
+  organizer: string;
+  date: string;
+  description: string;
+  filePath: string;
+  fileType: "pdf" | "png" | "jpg" | "jpeg";
+  verificationUrl?: string;
+};
+
+export const trainings: Training[] = [
+  {
+    id: "dsa-summer-course",
+    title: "Fundamentals of Data Structures: Learn, Apply and Build Projects",
+    organizer: "Centre for Professional Enhancement, LPU",
+    date: "June 2026 – July 2026",
+    description:
+      "Skill development course covering core Data Structures and Algorithms concepts, application, and project building (Grade A).",
+    filePath: "/certificates/training/dsa-summer-course.pdf",
+    fileType: "pdf",
+  },
+];
+
+// ============================================================
 // EDUCATION
 // ============================================================
 
