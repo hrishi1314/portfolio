@@ -47,14 +47,27 @@ export default function Hero() {
       mouse.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
     };
 
+    const onMouseLeave = () => {
+      mouse.current = { x: -500, y: -500 };
+    };
+
     window.addEventListener("resize", onResize);
     window.addEventListener("mousemove", onMouseMove, { passive: true });
+    window.addEventListener("mouseleave", onMouseLeave);
 
     const CONNECTION_DIST = 140;
-    const CURSOR_DIST = 170;
+    const CURSOR_DIST = 175;
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
+
+      const isLight = document.documentElement.getAttribute("data-theme") === "light";
+      const rgb = isLight ? "192,107,32" : "208,138,75";
+      const ambientMaxAlpha = isLight ? 0.11 : 0.08;
+      const ambientLineWidth = isLight ? 0.75 : 0.7;
+      const mouseMaxAlpha = isLight ? 0.38 : 0.28;
+      const mouseLineWidth = isLight ? 1.15 : 1.0;
+      const baseNodeAlpha = isLight ? 0.40 : 0.38;
 
       // Node–node connections
       for (let i = 0; i < nodes.length; i++) {
@@ -63,10 +76,10 @@ export default function Hero() {
           const dy = nodes[i].y - nodes[j].y;
           const d = Math.sqrt(dx * dx + dy * dy);
           if (d < CONNECTION_DIST) {
-            const alpha = 0.08 * (1 - d / CONNECTION_DIST);
+            const alpha = ambientMaxAlpha * (1 - d / CONNECTION_DIST);
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(208,138,75,${alpha})`;
-            ctx.lineWidth = 0.7;
+            ctx.strokeStyle = `rgba(${rgb},${alpha})`;
+            ctx.lineWidth = ambientLineWidth;
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
             ctx.stroke();
@@ -77,16 +90,19 @@ export default function Hero() {
       // Cursor attraction lines
       const mx = mouse.current.x;
       const my = mouse.current.y;
-      if (mx > 0) {
+      const mouseActive = mx > 0 && my > 0 && mx < width && my < height;
+
+      if (mouseActive) {
         for (const n of nodes) {
           const dx = n.x - mx;
           const dy = n.y - my;
           const d = Math.sqrt(dx * dx + dy * dy);
           if (d < CURSOR_DIST) {
-            const alpha = 0.18 * (1 - d / CURSOR_DIST);
+            const factor = 1 - d / CURSOR_DIST;
+            const alpha = mouseMaxAlpha * factor;
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(208,138,75,${alpha})`;
-            ctx.lineWidth = 0.9;
+            ctx.strokeStyle = `rgba(${rgb},${alpha})`;
+            ctx.lineWidth = mouseLineWidth;
             ctx.moveTo(n.x, n.y);
             ctx.lineTo(mx, my);
             ctx.stroke();
@@ -96,9 +112,25 @@ export default function Hero() {
 
       // Nodes
       for (const n of nodes) {
+        let r = n.r;
+        let alpha = baseNodeAlpha;
+
+        if (mouseActive) {
+          const dx = n.x - mx;
+          const dy = n.y - my;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < CURSOR_DIST) {
+            const factor = 1 - d / CURSOR_DIST;
+            alpha = isLight
+              ? baseNodeAlpha + 0.32 * factor
+              : baseNodeAlpha + 0.24 * factor;
+            r = n.r + 0.45 * factor;
+          }
+        }
+
         ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(208,138,75,0.38)";
+        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${rgb},${alpha})`;
         ctx.fill();
 
         n.x += n.vx;
@@ -116,6 +148,7 @@ export default function Hero() {
       cancelAnimationFrame(rafId.current);
       window.removeEventListener("resize", onResize);
       window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseleave", onMouseLeave);
     };
   }, []);
 
@@ -147,17 +180,19 @@ export default function Hero() {
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}
       />
 
-      {/* Ambient glow blobs */}
+      {/* Ambient glow blobs — opacity scaled down via CSS var for light theme */}
       <div aria-hidden="true" style={{
         position: "absolute", top: "15%", left: "60%",
         width: "500px", height: "500px",
-        background: "radial-gradient(circle, rgba(208,138,75,0.07) 0%, transparent 70%)",
+        background: "radial-gradient(circle, var(--accent-glow) 0%, transparent 70%)",
+        opacity: "var(--hero-blob-opacity, 1)",
         pointerEvents: "none",
       }} />
       <div aria-hidden="true" style={{
         position: "absolute", bottom: "20%", left: "-5%",
         width: "400px", height: "400px",
-        background: "radial-gradient(circle, rgba(208,138,75,0.04) 0%, transparent 70%)",
+        background: "radial-gradient(circle, var(--accent-dim) 0%, transparent 70%)",
+        opacity: "var(--hero-blob-opacity, 1)",
         pointerEvents: "none",
       }} />
 
@@ -179,7 +214,7 @@ export default function Hero() {
           style={{
             fontSize: "clamp(3rem, 7.5vw, 5.8rem)",
             fontWeight: 800,
-            lineHeight: 1.0,
+            lineHeight: 1.05,
             letterSpacing: "-0.035em",
             marginBottom: "18px",
           }}
@@ -324,9 +359,9 @@ export default function Hero() {
           animate={{ y: [0, 7, 0] }}
           transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
           style={{
-            width: "1px",
+            width: "2px",
             height: "32px",
-            background: "linear-gradient(to bottom, rgba(208,138,75,0.55), transparent)",
+            background: "linear-gradient(to bottom, var(--accent-border), transparent)",
           }}
         />
       </motion.div>

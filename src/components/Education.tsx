@@ -63,7 +63,7 @@ export default function Education() {
             position: "absolute",
             left: 0, top: 0, bottom: 0,
             width: "3px",
-            background: "linear-gradient(to bottom, var(--accent), rgba(208,138,75,0.15))",
+            background: "linear-gradient(to bottom, var(--accent), var(--accent-dim))",
             borderRadius: "0 2px 2px 0",
           }} />
 
@@ -125,7 +125,7 @@ export default function Education() {
           {/* Focus */}
           <div style={{
             padding: "14px 16px",
-            background: "rgba(255,255,255,0.025)",
+            background: "var(--bg-secondary)",
             border: "1px solid var(--border)",
             borderRadius: "8px",
             marginBottom: "24px",

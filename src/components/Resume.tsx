@@ -32,7 +32,7 @@ export default function Resume() {
             textAlign: "center",
             position: "relative",
             overflow: "hidden",
-            background: "linear-gradient(135deg, var(--bg-card) 0%, rgba(17,19,24,0.8) 100%)",
+            background: "var(--bg-card)",
           }}
         >
           {/* Subtle glow */}
@@ -41,7 +41,7 @@ export default function Resume() {
             top: "-30%", left: "50%",
             transform: "translateX(-50%)",
             width: "400px", height: "200px",
-            background: "radial-gradient(ellipse, rgba(208,138,75,0.07) 0%, transparent 70%)",
+            background: "radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%)",
             pointerEvents: "none",
           }} />
 
@@ -49,7 +49,7 @@ export default function Resume() {
           <div aria-hidden="true" style={{
             position: "absolute",
             top: 0, left: "20%", right: "20%", height: "1px",
-            background: "linear-gradient(90deg, transparent, rgba(208,138,75,0.30), transparent)",
+            background: "linear-gradient(90deg, transparent, var(--accent-border), transparent)",
           }} />
 
           <motion.h2
