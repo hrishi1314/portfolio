@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="256" height="256">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#844839" />
+      <stop offset="100%" stop-color="#5E3125" />
+    </linearGradient>
+    <linearGradient id="sparkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="50%" stop-color="#F2F1EF" />
+      <stop offset="100%" stop-color="#D9B18E" />
+    </linearGradient>
+  </defs>
+
+  <!-- Squircle Base with refined border -->
+  <rect width="64" height="64" rx="16" fill="url(#bg)" />
+  <rect width="61" height="61" x="1.5" y="1.5" rx="14.5" fill="none" stroke="#D9B18E" stroke-width="1.2" stroke-opacity="0.32" />
+
+  <!-- 4-point Architectural AI Spark -->
+  <path
+    d="M 32 10 C 32 23.2 40.8 32 54 32 C 40.8 32 32 40.8 32 54 C 32 40.8 23.2 32 10 32 C 23.2 32 32 23.2 32 10 Z"
+    fill="url(#sparkGrad)"
+  />
+
+  <!-- 4 Satellite Neural Nodes in diagonal quadrants -->
+  <circle cx="18" cy="18" r="2.4" fill="#D9B18E" />
+  <circle cx="46" cy="18" r="2.4" fill="#D9B18E" />
+  <circle cx="18" cy="46" r="2.4" fill="#D9B18E" />
+  <circle cx="46" cy="46" r="2.4" fill="#D9B18E" />
+</svg>
