@@ -16,69 +16,85 @@
   --transition-base: 0.25s ease;
 }
 
-/* ── Dark theme ──────────────────────────────────────────── */
+/* ── Dark theme (Warm Espresso & Sand) ─────────────────────── */
 [data-theme="dark"] {
-  --bg-primary: #09090B;
-  --bg-secondary: #121215;
-  --bg-card: #18181B;
-  --border: #27272A;
-  --border-hover: #3F3F46;
-  --text-primary: #FAFAFA;
-  --text-secondary: #A1A1AA;
-  --text-muted: #71717A;
-  --accent: #3B82F6;
-  --accent-hover: #60A5FA;
-  --accent-dim: rgba(59, 130, 246, 0.10);
-  --accent-border: rgba(59, 130, 246, 0.22);
-  --accent-glow: rgba(59, 130, 246, 0.15);
-  --accent-emerald: #10B981;
-  --navbar-blur-bg: rgba(9, 9, 11, 0.90);
-  --mobile-menu-bg: rgba(9, 9, 11, 0.98);
-  --modal-backdrop: rgba(0, 0, 0, 0.82);
-  --grid-line: rgba(59, 130, 246, 0.02);
-  --btn-hover-bg: rgba(255, 255, 255, 0.06);
-  --hero-blob-opacity: 0.65;
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.4), 0 8px 24px -4px rgba(0, 0, 0, 0.5);
-  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.5), 0 20px 36px rgba(0, 0, 0, 0.6);
+  /* Warm dark espresso ground — organic, deep, non-synthetic */
+  --bg-primary: #151311;
+  --bg-secondary: #1F1B18;
+  --bg-card: #25201D;
+  /* Palette stone borders */
+  --border: #3D3530;
+  --border-hover: #D9B18E;
+  /* Palette soft porcelain & light stone text */
+  --text-primary: #F2F1EF;
+  --text-secondary: #D9D2CC;
+  --text-muted: #9E938A;
+  /* Palette warm sand primary accent (#D9B18E) & terracotta secondary (#A67564) */
+  --accent: #D9B18E;
+  --accent-hover: #E8CCA8;
+  --accent-warm: #A67564;
+  --accent-dim: rgba(217, 177, 142, 0.12);
+  --accent-border: rgba(217, 177, 142, 0.28);
+  --accent-glow: rgba(217, 177, 142, 0.16);
+  /* Organic soft sage for status indicator */
+  --accent-emerald: #7BA28F;
+  /* Button colors */
+  --btn-primary-bg: #D9B18E;
+  --btn-primary-text: #151311;
+  /* Surfaces & Overlays */
+  --navbar-blur-bg: rgba(21, 19, 17, 0.90);
+  --mobile-menu-bg: rgba(21, 19, 17, 0.98);
+  --modal-backdrop: rgba(10, 8, 7, 0.85);
+  --grid-line: rgba(217, 177, 142, 0.025);
+  --btn-hover-bg: rgba(242, 241, 239, 0.06);
+  --hero-blob-opacity: 0.45;
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.35), 0 8px 24px -4px rgba(0, 0, 0, 0.45);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.45), 0 20px 36px rgba(0, 0, 0, 0.55);
   color-scheme: dark;
 }
 
-/* ── Light theme ─────────────────────────────────────────── */
+/* ── Light theme (Soft Porcelain & Terracotta) ──────────────── */
 [data-theme="light"] {
-  /* Warm porcelain chalk background — subtle, glare-free matte finish */
-  --bg-primary: #F9F9FB;
-  --bg-secondary: #F3F4F6;
+  /* Exact #F2F1EF soft porcelain background */
+  --bg-primary: #F2F1EF;
+  --bg-secondary: #E7E3DD;
   --bg-card: #FFFFFF;
-  /* Crisp delicate borders */
-  --border: #E5E7EB;
-  --border-hover: #CBD5E1;
-  /* Deep ink text — crisp reading contrast */
-  --text-primary: #111827;
-  --text-secondary: #4B5563;
-  --text-muted: #9CA3AF;
-  /* Oxford Sapphire / Deep Indigo accent */
-  --accent: #1E3A8A;
-  --accent-hover: #1D4ED8;
-  --accent-dim: rgba(30, 58, 138, 0.07);
-  --accent-border: rgba(30, 58, 138, 0.18);
-  --accent-glow: rgba(30, 58, 138, 0.10);
-  --accent-emerald: #059669;
+  /* Exact #D9D2CC warm stone border */
+  --border: #D9D2CC;
+  --border-hover: #A67564;
+  /* Deep warm espresso text */
+  --text-primary: #261B17;
+  --text-secondary: #5C524C;
+  --text-muted: #8E837B;
+  /* Exact #723E31 deep espresso terracotta accent */
+  --accent: #723E31;
+  --accent-hover: #8D4E3E;
+  --accent-warm: #D9B18E;
+  --accent-dim: rgba(114, 62, 49, 0.08);
+  --accent-border: rgba(114, 62, 49, 0.22);
+  --accent-glow: rgba(166, 117, 100, 0.12);
+  /* Organic soft forest sage for status indicator */
+  --accent-emerald: #3A6652;
+  /* Button colors */
+  --btn-primary-bg: #723E31;
+  --btn-primary-text: #FFFFFF;
   /* Navigation */
-  --navbar-blur-bg: rgba(249, 249, 251, 0.92);
-  --mobile-menu-bg: rgba(249, 249, 251, 0.98);
+  --navbar-blur-bg: rgba(242, 241, 239, 0.92);
+  --mobile-menu-bg: rgba(242, 241, 239, 0.98);
   /* Modals */
-  --modal-backdrop: rgba(15, 23, 42, 0.60);
+  --modal-backdrop: rgba(38, 27, 23, 0.65);
   /* Subtle architectural grid lines */
-  --grid-line: rgba(30, 58, 138, 0.02);
+  --grid-line: rgba(114, 62, 49, 0.025);
   /* Button hover */
-  --btn-hover-bg: rgba(0, 0, 0, 0.04);
+  --btn-hover-bg: rgba(38, 27, 23, 0.04);
   /* Hero blob intensity */
-  --hero-blob-opacity: 0.25;
+  --hero-blob-opacity: 0.22;
   /* Tactile layered shadows for cards */
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 8px 24px -4px rgba(0, 0, 0, 0.06);
-  --shadow-card-hover: 0 4px 12px -2px rgba(0, 0, 0, 0.06), 0 20px 36px -4px rgba(0, 0, 0, 0.09);
+  --shadow-card: 0 1px 3px rgba(38, 27, 23, 0.04), 0 8px 24px -4px rgba(38, 27, 23, 0.06);
+  --shadow-card-hover: 0 4px 12px -2px rgba(38, 27, 23, 0.06), 0 20px 36px -4px rgba(38, 27, 23, 0.09);
   color-scheme: light;
 }
+
 
 /* ============================================================
    BASE RESET
@@ -132,7 +148,7 @@ body.cursor-active * { cursor: none !important; }
 .cursor-ring.hovering {
   width: 52px; height: 52px;
   border-color: var(--accent);
-  background: rgba(208, 138, 75, 0.05);
+  background: var(--accent-dim);
 }
 
 /* ============================================================
@@ -141,22 +157,23 @@ body.cursor-active * { cursor: none !important; }
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
 ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #706B64; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
 /* ============================================================
    SELECTION
    ============================================================ */
-::selection { background: rgba(208, 138, 75, 0.25); color: var(--text-primary); }
+::selection { background: var(--accent-border); color: var(--text-primary); }
 
 /* ============================================================
    TYPOGRAPHY
    ============================================================ */
 .text-gradient {
-  background: linear-gradient(130deg, #E2A267 0%, #D08A4B 50%, #C47840 100%);
+  background: linear-gradient(135deg, var(--text-primary) 15%, var(--accent) 65%, var(--accent-warm) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
 
 .section-label {
   font-size: 0.7rem;
@@ -355,8 +372,8 @@ body.cursor-active * { cursor: none !important; }
   align-items: center;
   gap: 8px;
   padding: 11px 22px;
-  background: var(--accent);
-  color: #FFFFFF !important;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text) !important;
   border-radius: 8px;
   font-size: 0.875rem;
   font-weight: 600;
@@ -368,14 +385,12 @@ body.cursor-active * { cursor: none !important; }
   transition: background 0.18s, transform 0.15s, box-shadow 0.18s;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 2px 10px var(--accent-dim);
 }
 .btn-primary:hover {
   background: var(--accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(30, 58, 138, 0.25);
-}
-[data-theme="dark"] .btn-primary:hover {
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+  box-shadow: 0 6px 20px var(--accent-border);
 }
 .btn-primary:active { transform: translateY(0); box-shadow: none; }
 
@@ -433,12 +448,12 @@ body.cursor-active * { cursor: none !important; }
   align-items: center;
   gap: 8px;
   padding: 5px 12px;
-  background: rgba(16, 185, 129, 0.08);
-  border: 1px solid rgba(16, 185, 129, 0.24);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-border);
   border-radius: 9999px;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--accent-emerald);
+  color: var(--text-primary);
   letter-spacing: 0.02em;
   font-family: var(--font-mono);
 }
@@ -448,9 +463,10 @@ body.cursor-active * { cursor: none !important; }
   height: 7px;
   border-radius: 50%;
   background: var(--accent-emerald);
-  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5);
+  box-shadow: 0 0 0 0 rgba(120, 165, 144, 0.4);
   animation: pulse-dot 2s infinite;
 }
+
 
 @keyframes pulse-dot {
   0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }

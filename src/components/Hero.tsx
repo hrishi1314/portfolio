@@ -62,12 +62,13 @@ export default function Hero() {
       ctx.clearRect(0, 0, width, height);
 
       const isLight = document.documentElement.getAttribute("data-theme") === "light";
-      const rgb = isLight ? "192,107,32" : "208,138,75";
-      const ambientMaxAlpha = isLight ? 0.11 : 0.08;
-      const ambientLineWidth = isLight ? 0.75 : 0.7;
-      const mouseMaxAlpha = isLight ? 0.38 : 0.28;
-      const mouseLineWidth = isLight ? 1.15 : 1.0;
-      const baseNodeAlpha = isLight ? 0.40 : 0.38;
+      // Neutral Palette: #A67564 (166, 117, 100) in light, #D9B18E (217, 177, 142) in dark
+      const rgb = isLight ? "166,117,100" : "217,177,142";
+      const ambientMaxAlpha = isLight ? 0.08 : 0.07;
+      const ambientLineWidth = 0.65;
+      const mouseMaxAlpha = isLight ? 0.22 : 0.20;
+      const mouseLineWidth = 0.9;
+      const baseNodeAlpha = isLight ? 0.26 : 0.24;
 
       // Node–node connections
       for (let i = 0; i < nodes.length; i++) {
