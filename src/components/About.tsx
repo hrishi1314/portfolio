@@ -44,8 +44,8 @@ export default function About() {
           className="about-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 300px",
-            gap: "56px",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 480px), 1fr))",
+            gap: "48px",
             alignItems: "start",
           }}
         >
@@ -56,7 +56,7 @@ export default function About() {
                 key={i}
                 {...item(0.14 + i * 0.1)}
                 style={{
-                  fontSize: "1.025rem",
+                  fontSize: "1.05rem",
                   color: "var(--text-secondary)",
                   lineHeight: 1.85,
                   letterSpacing: "0.01em",
@@ -67,62 +67,109 @@ export default function About() {
             ))}
           </div>
 
-          {/* Focus card */}
+          {/* Focus & Engineering Principles Card */}
           <motion.div
             {...item(0.38)}
-            className="card card-glow"
+            className="card"
             style={{
-              padding: "26px",
-              position: "sticky",
-              top: "88px",
+              padding: "32px",
+              background: "var(--bg-card)",
+              border: "1px solid var(--border)",
+              borderRadius: "16px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "24px",
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
-              <div style={{
-                width: "34px", height: "34px", borderRadius: "9px",
-                background: "var(--accent-dim)",
-                border: "1px solid var(--accent-border)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-              }}>
-                <Zap size={15} color="var(--accent)" />
-              </div>
-              <span style={{
-                fontSize: "0.72rem",
-                fontWeight: 700,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: "var(--text-muted)",
-                fontFamily: "var(--font-mono)",
-              }}>
-                Currently focused on
-              </span>
-            </div>
-
-            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px" }}>
-              {about.currentFocus.map((focusItem) => (
-                <li
-                  key={focusItem}
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+                <div
                   style={{
+                    width: "34px",
+                    height: "34px",
+                    borderRadius: "8px",
+                    background: "var(--accent-dim)",
+                    border: "1px solid var(--accent-border)",
                     display: "flex",
-                    alignItems: "flex-start",
-                    gap: "10px",
-                    fontSize: "0.88rem",
-                    color: "var(--text-primary)",
-                    fontWeight: 500,
-                    lineHeight: 1.5,
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
-                  <span style={{
-                    width: "5px", height: "5px", borderRadius: "50%",
-                    background: "var(--accent)",
-                    flexShrink: 0, marginTop: "6px",
-                  }} aria-hidden="true" />
-                  {focusItem}
-                </li>
-              ))}
-            </ul>
+                  <Zap size={16} color="var(--accent)" />
+                </div>
+                <span
+                  style={{
+                    fontSize: "0.74rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    color: "var(--text-muted)",
+                    fontFamily: "var(--font-mono)",
+                  }}
+                >
+                  Active Technical Focus
+                </span>
+              </div>
+
+              <ul style={{ listStyle: "none", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                {about.currentFocus.map((focusItem) => (
+                  <li
+                    key={focusItem}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                      fontSize: "0.88rem",
+                      color: "var(--text-primary)",
+                      fontWeight: 600,
+                      padding: "8px 12px",
+                      background: "var(--bg-secondary)",
+                      borderRadius: "8px",
+                      border: "1px solid var(--border)",
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: "6px",
+                        height: "6px",
+                        borderRadius: "50%",
+                        background: "var(--accent)",
+                        flexShrink: 0,
+                      }}
+                      aria-hidden="true"
+                    />
+                    {focusItem}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div style={{ borderTop: "1px solid var(--border)", paddingTop: "20px" }}>
+              <p
+                style={{
+                  fontSize: "0.72rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "var(--text-muted)",
+                  fontFamily: "var(--font-mono)",
+                  marginBottom: "12px",
+                }}
+              >
+                Engineering Philosophy:
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.6 }}>
+                  &bull; <strong style={{ color: "var(--text-primary)" }}>Algorithmic Rigor:</strong> Choosing optimal data structures (e.g. HashMaps for $O(1)$ lookups, PriorityQueues for dynamic ordering) before writing UI code.
+                </p>
+                <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.6 }}>
+                  &bull; <strong style={{ color: "var(--text-primary)" }}>Evidence Over Buzzwords:</strong> Building measurable pipelines with concrete datasets and evaluation metrics over theoretical talk.
+                </p>
+              </div>
+            </div>
           </motion.div>
         </div>
+
       </div>
     </section>
   );

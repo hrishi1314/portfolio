@@ -124,33 +124,118 @@ function CertCard({
         {/* Title */}
         <h3
           style={{
-            fontSize: "1rem",
-            fontWeight: 600,
+            fontSize: "0.95rem",
+            fontWeight: 700,
             color: "var(--text-primary)",
             lineHeight: 1.35,
-            flex: 1,
           }}
         >
           {cert.title}
         </h3>
 
+        {/* Visual Certificate Preview */}
+        {cert.fileType !== "pdf" ? (
+          <div
+            onClick={handleView}
+            style={{
+              position: "relative",
+              width: "100%",
+              height: "150px",
+              borderRadius: "8px",
+              overflow: "hidden",
+              border: "1px solid var(--border)",
+              background: "var(--bg-secondary)",
+              cursor: "pointer",
+            }}
+          >
+            <Image
+              src={cert.filePath}
+              alt={cert.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 340px"
+              style={{ objectFit: "cover", objectPosition: "top center" }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "rgba(0, 0, 0, 0.35)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                opacity: 0,
+                transition: "opacity 0.2s ease",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "0")}
+            >
+              <span
+                className="badge"
+                style={{
+                  background: "rgba(0, 0, 0, 0.75)",
+                  color: "#FFFFFF",
+                  border: "none",
+                  fontSize: "0.75rem",
+                  gap: "5px",
+                }}
+              >
+                <ZoomIn size={13} />
+                Click to Inspect
+              </span>
+            </div>
+          </div>
+        ) : (
+          <div
+            onClick={handleView}
+            style={{
+              height: "150px",
+              borderRadius: "8px",
+              border: "1px dashed var(--border)",
+              background: "var(--bg-secondary)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "8px",
+              cursor: "pointer",
+              padding: "16px",
+              textAlign: "center",
+              transition: "border-color 0.2s, background 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor = "var(--accent)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
+            }}
+          >
+            <Award size={26} color={color} />
+            <span style={{ fontSize: "0.82rem", fontWeight: 700, color: "var(--text-primary)" }}>
+              Verified PDF Credential
+            </span>
+            <span style={{ fontSize: "0.7rem", color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>
+              {cert.issuer} &bull; Click to View
+            </span>
+          </div>
+        )}
+
         {/* Actions */}
-        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginTop: "auto" }}>
           <button
             onClick={handleView}
             className="btn-ghost"
-            style={{ flex: 1, justifyContent: "center" }}
+            style={{ flex: 1, justifyContent: "center", fontSize: "0.8rem", padding: "7px 12px" }}
             aria-label={`View ${cert.title} certificate`}
           >
             {cert.fileType === "pdf" ? (
               <>
-                <ExternalLink size={14} />
-                View Certificate
+                <ExternalLink size={13} />
+                Open PDF
               </>
             ) : (
               <>
-                <ZoomIn size={14} />
-                View Certificate
+                <ZoomIn size={13} />
+                Enlarge Certificate
               </>
             )}
           </button>
@@ -161,8 +246,9 @@ function CertCard({
               rel="noopener noreferrer"
               className="btn-ghost"
               aria-label={`Verify ${cert.title} certificate`}
+              style={{ fontSize: "0.8rem", padding: "7px 12px" }}
             >
-              <ExternalLink size={14} />
+              <ExternalLink size={13} />
               Verify
             </a>
           )}
@@ -171,6 +257,7 @@ function CertCard({
     </motion.div>
   );
 }
+
 
 function ImageLightbox({
   cert,
@@ -365,8 +452,8 @@ export default function Certifications() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-            gap: "20px",
+            gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))",
+            gap: "24px",
           }}
         >
           {certifications.map((cert, i) => (

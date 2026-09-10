@@ -33,126 +33,175 @@ function TrainingCard({
         delay: 0.1 + index * 0.08,
         ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
       }}
+      style={{ width: "100%" }}
     >
       <div
-        className="card card-glow"
+        className="card"
         style={{
-          padding: "24px",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          gap: "16px",
-          position: "relative",
-          overflow: "hidden",
+          padding: "32px",
+          background: "var(--bg-card)",
+          border: "1px solid var(--border)",
+          borderRadius: "16px",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))",
+          gap: "32px",
+          alignItems: "center",
         }}
       >
-        {/* Top accent bar */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: "2px",
-            background: `linear-gradient(90deg, ${TRAINING_ACCENT}, transparent)`,
-          }}
-        />
+        {/* Left: Technical Story & Competencies */}
+        <div>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px", flexWrap: "wrap" }}>
+            <span
+              className="badge"
+              style={{
+                background: "rgba(16, 185, 129, 0.08)",
+                border: "1px solid rgba(16, 185, 129, 0.25)",
+                color: "var(--accent-emerald)",
+                fontWeight: 700,
+              }}
+            >
+              Grade A Distinction
+            </span>
+            <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>
+              {training.date}
+            </span>
+          </div>
 
-        {/* Icon + Organizer */}
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <div
+          <h3
             style={{
-              width: "36px",
-              height: "36px",
-              borderRadius: "8px",
-              background: `${TRAINING_ACCENT}18`,
-              border: `1px solid ${TRAINING_ACCENT}30`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
+              fontSize: "clamp(1.2rem, 2.2vw, 1.5rem)",
+              fontWeight: 700,
+              color: "var(--text-primary)",
+              lineHeight: 1.3,
+              letterSpacing: "-0.015em",
+              marginBottom: "10px",
             }}
           >
-            <BookOpen size={18} color={TRAINING_ACCENT} />
-          </div>
-          <div>
-            <p
-              style={{
-                fontSize: "0.78rem",
-                fontWeight: 600,
-                color: TRAINING_ACCENT,
-                fontFamily: "var(--font-mono)",
-                letterSpacing: "0.06em",
-              }}
-            >
-              {training.organizer}
-            </p>
-            <p
-              style={{
-                fontSize: "0.75rem",
-                color: "var(--text-muted)",
-              }}
-            >
-              {training.date}
-            </p>
-          </div>
-        </div>
+            {training.title}
+          </h3>
 
-        {/* Title */}
-        <h3
-          style={{
-            fontSize: "1rem",
-            fontWeight: 600,
-            color: "var(--text-primary)",
-            lineHeight: 1.35,
-            flex: 1,
-          }}
-        >
-          {training.title}
-        </h3>
-
-        {/* Description */}
-        {training.description && (
           <p
             style={{
-              fontSize: "0.85rem",
+              fontSize: "0.86rem",
+              fontWeight: 600,
+              color: "var(--accent)",
+              fontFamily: "var(--font-mono)",
+              marginBottom: "12px",
+            }}
+          >
+            {training.organizer}
+          </p>
+
+          <p
+            style={{
+              fontSize: "0.92rem",
               color: "var(--text-secondary)",
-              lineHeight: 1.5,
+              lineHeight: 1.65,
+              marginBottom: "20px",
             }}
           >
             {training.description}
           </p>
-        )}
 
-        {/* Actions */}
-        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+          <div>
+            <p
+              style={{
+                fontSize: "0.72rem",
+                color: "var(--text-muted)",
+                fontFamily: "var(--font-mono)",
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+                marginBottom: "8px",
+              }}
+            >
+              Core Topics Mastered &amp; Implemented:
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+              {[
+                "Arrays & Vectors",
+                "Linked Lists",
+                "Stacks & Queues",
+                "Priority Queues",
+                "Binary Trees & BST",
+                "Graph Traversals (BFS/DFS)",
+                "Sorting & Search Algorithms",
+                "Time & Space Complexity",
+              ].map((topic) => (
+                <span key={topic} className="badge-neutral" style={{ padding: "3px 9px", fontSize: "0.74rem" }}>
+                  {topic}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Right: Verified Accreditation Preview Frame */}
+        <div
+          onClick={handleView}
+          style={{
+            padding: "28px",
+            background: "var(--bg-secondary)",
+            borderRadius: "12px",
+            border: "1px dashed var(--border)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+            gap: "16px",
+            cursor: "pointer",
+            transition: "border-color 0.2s, transform 0.2s",
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.borderColor = "var(--accent)";
+            (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
+            (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+          }}
+        >
+          <div
+            style={{
+              width: "56px",
+              height: "56px",
+              borderRadius: "14px",
+              background: "var(--bg-card)",
+              border: "1px solid var(--border)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <BookOpen size={28} color="var(--accent)" />
+          </div>
+
+          <div>
+            <h4 style={{ fontSize: "1.05rem", fontWeight: 700, color: "var(--text-primary)" }}>
+              Official University Accreditation
+            </h4>
+            <p style={{ fontSize: "0.78rem", color: "var(--text-secondary)", marginTop: "4px" }}>
+              Issued by Centre for Professional Enhancement &bull; LPU
+            </p>
+            <p style={{ fontSize: "0.72rem", color: "var(--accent-emerald)", fontWeight: 600, marginTop: "2px" }}>
+              Evaluation: Grade A (Highest Performance Tier)
+            </p>
+          </div>
+
           <button
             onClick={handleView}
-            className="btn-ghost"
-            style={{ flex: 1, justifyContent: "center" }}
-            aria-label={`View ${training.title} certificate`}
+            className="btn-primary"
+            style={{ width: "100%", justifyContent: "center", fontSize: "0.85rem", padding: "10px 18px" }}
+            aria-label="View official DSA Summer Course PDF certificate"
           >
-            <ExternalLink size={14} />
-            View Certificate
+            <ExternalLink size={15} />
+            Inspect Verified Certificate PDF
           </button>
-          {training.verificationUrl && (
-            <a
-              href={training.verificationUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-ghost"
-              aria-label={`Verify ${training.title}`}
-            >
-              <ExternalLink size={14} />
-              Verify
-            </a>
-          )}
         </div>
       </div>
     </motion.div>
   );
 }
+
 
 export default function Training() {
   const ref = useRef(null);

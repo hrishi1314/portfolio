@@ -60,21 +60,31 @@ export default function Navbar() {
   return (
     <header className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
       <div className="navbar-inner">
-        {/* Logo */}
-        <motion.a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
-          initial={{ opacity: 0, x: -16 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="navbar-logo"
-          aria-label="Hrishikesh R — back to top"
-        >
-          HRISHIKESH R
-        </motion.a>
+        {/* Logo & Status */}
+        <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+          <motion.a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            initial={{ opacity: 0, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="navbar-logo"
+            aria-label="Hrishikesh R — back to top"
+          >
+            HRISHIKESH R
+          </motion.a>
+
+          <span
+            className="status-pill"
+            style={{ display: "inline-flex", fontSize: "0.72rem", padding: "3px 10px" }}
+          >
+            <span className="status-dot" />
+            Open to SWE & AI Roles
+          </span>
+        </div>
 
         {/* Desktop Nav */}
         <nav aria-label="Main navigation" className="navbar-links">

@@ -199,134 +199,257 @@ export default function Hero() {
       {/* Content */}
       <div
         className="section-inner"
-        style={{ position: "relative", zIndex: 1, width: "100%", paddingTop: "120px", paddingBottom: "100px" }}
+        style={{
+          position: "relative",
+          zIndex: 1,
+          width: "100%",
+          paddingTop: "125px",
+          paddingBottom: "80px",
+        }}
       >
-        <motion.span
-          className="section-label"
-          {...fadeUp(0)}
-          style={{ display: "block", marginBottom: "20px" }}
-        >
-          Hi, I&apos;m
-        </motion.span>
-
-        <motion.h1
-          {...fadeUp(0.08)}
+        <div
           style={{
-            fontSize: "clamp(3rem, 7.5vw, 5.8rem)",
-            fontWeight: 800,
-            lineHeight: 1.05,
-            letterSpacing: "-0.035em",
-            marginBottom: "18px",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 460px), 1fr))",
+            gap: "50px",
+            alignItems: "center",
           }}
         >
-          <span className="text-gradient">Hrishikesh R</span>
-        </motion.h1>
+          {/* Left Column: Bio & Core Actions */}
+          <div>
+            <motion.div {...fadeUp(0)} style={{ marginBottom: "18px" }}>
+              <span className="status-pill">
+                <span className="status-dot" />
+                Available for SWE &amp; AI/ML Internships
+              </span>
+            </motion.div>
 
-        <motion.p
-          {...fadeUp(0.18)}
-          style={{
-            fontSize: "clamp(1.05rem, 2.5vw, 1.3rem)",
-            fontWeight: 500,
-            color: "var(--text-secondary)",
-            marginBottom: "8px",
-            letterSpacing: "-0.01em",
-          }}
-        >
-          Computer Science &amp; Engineering Student
-        </motion.p>
+            <motion.h1
+              {...fadeUp(0.08)}
+              style={{
+                fontSize: "clamp(2.8rem, 6.5vw, 5.2rem)",
+                fontWeight: 800,
+                lineHeight: 1.05,
+                letterSpacing: "-0.035em",
+                marginBottom: "16px",
+              }}
+            >
+              <span className="text-gradient">Hrishikesh R</span>
+            </motion.h1>
 
-        <motion.p
-          {...fadeUp(0.25)}
-          style={{
-            fontSize: "0.85rem",
-            fontWeight: 500,
-            color: "var(--accent)",
-            fontFamily: "var(--font-mono)",
-            marginBottom: "28px",
-            letterSpacing: "0.04em",
-          }}
-        >
-          {personal.tagline}
-        </motion.p>
+            <motion.p
+              {...fadeUp(0.18)}
+              style={{
+                fontSize: "clamp(1.1rem, 2.2vw, 1.35rem)",
+                fontWeight: 600,
+                color: "var(--text-primary)",
+                marginBottom: "8px",
+                letterSpacing: "-0.01em",
+              }}
+            >
+              Computer Science &amp; Engineering Student
+            </motion.p>
 
-        <motion.p
-          {...fadeUp(0.32)}
-          style={{
-            fontSize: "1rem",
-            color: "var(--text-secondary)",
-            maxWidth: "500px",
-            lineHeight: 1.75,
-            marginBottom: "44px",
-          }}
-        >
-          {personal.description}
-        </motion.p>
+            <motion.p
+              {...fadeUp(0.24)}
+              style={{
+                fontSize: "0.88rem",
+                fontWeight: 600,
+                color: "var(--accent)",
+                fontFamily: "var(--font-mono)",
+                marginBottom: "20px",
+                letterSpacing: "0.02em",
+              }}
+            >
+              Lovely Professional University • CGPA: 8.69 • Focus: AI/ML
+            </motion.p>
 
-        {/* CTAs */}
-        <motion.div
-          {...fadeUp(0.4)}
-          style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "32px" }}
-        >
-          <a
-            href="#projects"
-            className="btn-primary"
-            onClick={(e) => {
-              e.preventDefault();
-              document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" });
+            <motion.p
+              {...fadeUp(0.3)}
+              style={{
+                fontSize: "1.025rem",
+                color: "var(--text-secondary)",
+                lineHeight: 1.75,
+                marginBottom: "36px",
+                maxWidth: "560px",
+              }}
+            >
+              Building practical software applications combining algorithms, data structures, and generative AI. Here is the verified visual proof and code for my projects, coursework, and credentials.
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div
+              {...fadeUp(0.38)}
+              style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "32px" }}
+            >
+              <a
+                href="#projects"
+                className="btn-primary"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                aria-label="View Project Showcases"
+              >
+                View Project Proof
+                <ArrowRight size={16} />
+              </a>
+              <a
+                href={personal.resumePath}
+                download
+                className="btn-secondary"
+                aria-label="Download Resume PDF"
+              >
+                <Download size={16} />
+                Download CV
+              </a>
+            </motion.div>
+
+            {/* Social links */}
+            <motion.div
+              {...fadeUp(0.44)}
+              style={{ display: "flex", gap: "10px", alignItems: "center", flexWrap: "wrap" }}
+            >
+              <span
+                style={{
+                  fontSize: "0.75rem",
+                  color: "var(--text-muted)",
+                  fontFamily: "var(--font-mono)",
+                  marginRight: "4px",
+                }}
+              >
+                Profiles:
+              </span>
+              <a
+                href={personal.github.startsWith("[") ? "#contact" : personal.github}
+                target={personal.github.startsWith("[") ? undefined : "_blank"}
+                rel={personal.github.startsWith("[") ? undefined : "noopener noreferrer"}
+                className="btn-ghost"
+                aria-label="GitHub profile"
+                style={{ padding: "7px 14px", fontSize: "0.82rem" }}
+              >
+                <GitHubIcon size={15} />
+                GitHub
+              </a>
+              <a
+                href={personal.linkedin.startsWith("[") ? "#contact" : personal.linkedin}
+                target={personal.linkedin.startsWith("[") ? undefined : "_blank"}
+                rel={personal.linkedin.startsWith("[") ? undefined : "noopener noreferrer"}
+                className="btn-ghost"
+                aria-label="LinkedIn profile"
+                style={{ padding: "7px 14px", fontSize: "0.82rem" }}
+              >
+                <LinkedInIcon size={15} />
+                LinkedIn
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Evidence & Resume Proof Bento Card */}
+          <motion.div
+            {...fadeUp(0.25)}
+            className="card"
+            style={{
+              padding: "32px",
+              background: "var(--bg-card)",
+              border: "1px solid var(--border)",
+              borderRadius: "16px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "24px",
             }}
-            aria-label="View Projects"
           >
-            View Projects
-            <ArrowRight size={16} />
-          </a>
-          <a
-            href={personal.resumePath}
-            download
-            className="btn-secondary"
-            aria-label="Download Resume PDF"
-          >
-            <Download size={16} />
-            Download Resume
-          </a>
-        </motion.div>
+            {/* Header of Bento */}
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid var(--border)", paddingBottom: "16px" }}>
+              <div>
+                <p style={{ fontSize: "0.72rem", color: "var(--text-muted)", fontFamily: "var(--font-mono)", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                  Candidate Overview
+                </p>
+                <h3 style={{ fontSize: "1.15rem", fontWeight: 700, color: "var(--text-primary)" }}>
+                  Verified Resume Highlights
+                </h3>
+              </div>
+              <span className="badge" style={{ fontSize: "0.72rem" }}>
+                B.Tech CSE &bull; 2024–Present
+              </span>
+            </div>
 
-        {/* Social links */}
-        <motion.div
-          {...fadeUp(0.48)}
-          style={{ display: "flex", gap: "10px", alignItems: "center", flexWrap: "wrap" }}
-        >
-          <span style={{
-            fontSize: "0.75rem",
-            color: "var(--text-muted)",
-            fontFamily: "var(--font-mono)",
-            marginRight: "4px",
-          }}>
-            Find me on
-          </span>
-          <a
-            href={personal.github.startsWith("[") ? "#contact" : personal.github}
-            target={personal.github.startsWith("[") ? undefined : "_blank"}
-            rel={personal.github.startsWith("[") ? undefined : "noopener noreferrer"}
-            className="btn-ghost"
-            aria-label="GitHub profile"
-            style={{ padding: "7px 14px", fontSize: "0.82rem" }}
-          >
-            <GitHubIcon size={15} />
-            GitHub
-          </a>
-          <a
-            href={personal.linkedin.startsWith("[") ? "#contact" : personal.linkedin}
-            target={personal.linkedin.startsWith("[") ? undefined : "_blank"}
-            rel={personal.linkedin.startsWith("[") ? undefined : "noopener noreferrer"}
-            className="btn-ghost"
-            aria-label="LinkedIn profile"
-            style={{ padding: "7px 14px", fontSize: "0.82rem" }}
-          >
-            <LinkedInIcon size={15} />
-            LinkedIn
-          </a>
-        </motion.div>
+            {/* Metrics 2x2 Grid */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+              <div style={{ padding: "16px", background: "var(--bg-secondary)", borderRadius: "10px", border: "1px solid var(--border)" }}>
+                <p style={{ fontSize: "1.8rem", fontWeight: 800, color: "var(--text-primary)", lineHeight: 1 }}>
+                  8.69
+                </p>
+                <p style={{ fontSize: "0.78rem", fontWeight: 600, color: "var(--text-secondary)", marginTop: "6px" }}>
+                  Cumulative GPA
+                </p>
+                <p style={{ fontSize: "0.7rem", color: "var(--text-muted)", marginTop: "2px" }}>
+                  Lovely Professional Univ.
+                </p>
+              </div>
+
+              <div style={{ padding: "16px", background: "var(--bg-secondary)", borderRadius: "10px", border: "1px solid var(--border)" }}>
+                <p style={{ fontSize: "1.8rem", fontWeight: 800, color: "var(--text-primary)", lineHeight: 1 }}>
+                  Grade A
+                </p>
+                <p style={{ fontSize: "0.78rem", fontWeight: 600, color: "var(--text-secondary)", marginTop: "6px" }}>
+                  DSA Summer Course
+                </p>
+                <p style={{ fontSize: "0.7rem", color: "var(--text-muted)", marginTop: "2px" }}>
+                  CPE LPU Certification
+                </p>
+              </div>
+
+              <div style={{ padding: "16px", background: "var(--bg-secondary)", borderRadius: "10px", border: "1px solid var(--border)" }}>
+                <p style={{ fontSize: "1.8rem", fontWeight: 800, color: "var(--text-primary)", lineHeight: 1 }}>
+                  1,056+
+                </p>
+                <p style={{ fontSize: "0.78rem", fontWeight: 600, color: "var(--text-secondary)", marginTop: "6px" }}>
+                  Dataset Records
+                </p>
+                <p style={{ fontSize: "0.7rem", color: "var(--text-muted)", marginTop: "2px" }}>
+                  AI Recommender Project
+                </p>
+              </div>
+
+              <div style={{ padding: "16px", background: "var(--bg-secondary)", borderRadius: "10px", border: "1px solid var(--border)" }}>
+                <p style={{ fontSize: "1.8rem", fontWeight: 800, color: "var(--text-primary)", lineHeight: 1 }}>
+                  12+
+                </p>
+                <p style={{ fontSize: "0.78rem", fontWeight: 600, color: "var(--text-secondary)", marginTop: "6px" }}>
+                  Credentials &amp; Certs
+                </p>
+                <p style={{ fontSize: "0.7rem", color: "var(--text-muted)", marginTop: "2px" }}>
+                  Infosys, HackerRank, Neocolab
+                </p>
+              </div>
+            </div>
+
+            {/* Core Competency Tags */}
+            <div>
+              <p style={{ fontSize: "0.74rem", color: "var(--text-muted)", fontFamily: "var(--font-mono)", marginBottom: "10px", textTransform: "uppercase" }}>
+                Core Production Stack
+              </p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                {["Python", "C++", "Java", "Generative AI", "LLMs", "Streamlit", "DSA", "MySQL", "Scikit-learn"].map((skill) => (
+                  <span key={skill} className="badge-neutral" style={{ padding: "4px 9px", borderRadius: "5px", fontSize: "0.75rem", fontFamily: "var(--font-mono)" }}>
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Footer reassurance note */}
+            <div style={{ borderTop: "1px solid var(--border)", paddingTop: "14px", display: "flex", alignItems: "center", gap: "8px" }}>
+              <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--accent)" }} />
+              <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>
+                All claims below verified with screenshots &amp; code repositories.
+              </p>
+            </div>
+          </motion.div>
+        </div>
       </div>
+
 
       {/* Scroll indicator — fixed to bottom of viewport, not inside content */}
       <motion.div

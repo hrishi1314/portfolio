@@ -59,8 +59,8 @@ export default function Skills() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(210px, 1fr))",
-            gap: "16px",
+            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+            gap: "20px",
           }}
         >
           {skills.map((category, ci) => (
@@ -69,18 +69,10 @@ export default function Skills() {
               {...item(0.18 + ci * 0.07)}
               className="card"
               style={{
-                padding: "22px 24px",
-                transition: "border-color 0.2s, box-shadow 0.2s",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "var(--border-hover)";
-                (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 24px rgba(0,0,0,0.25)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
-                (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                padding: "24px 26px",
               }}
             >
+
               <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
                 <div style={{
                   width: "6px", height: "6px", borderRadius: "50%",
