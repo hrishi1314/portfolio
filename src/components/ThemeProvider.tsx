@@ -31,20 +31,19 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   // On mount: sync to localStorage (source of truth); default to "light"
   useEffect(() => {
-    const stored = localStorage.getItem("theme") as Theme | null;
-    const resolved: Theme =
-      stored === "dark" || stored === "light" ? stored : "light";
+    const stored = localStorage.getItem("portfolio_theme") as Theme | null;
+    const resolved: Theme = stored === "dark" ? "dark" : "light";
 
     setTheme(resolved);
     document.documentElement.setAttribute("data-theme", resolved);
-    if (!stored) localStorage.setItem("theme", resolved);
+    if (!stored) localStorage.setItem("portfolio_theme", resolved);
   }, []);
 
   const toggleTheme = useCallback(() => {
     setTheme((prev) => {
       const next: Theme = prev === "dark" ? "light" : "dark";
       document.documentElement.setAttribute("data-theme", next);
-      localStorage.setItem("theme", next);
+      localStorage.setItem("portfolio_theme", next);
       return next;
     });
   }, []);

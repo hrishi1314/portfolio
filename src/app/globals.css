@@ -17,7 +17,7 @@
 }
 
 /* ── Dark theme (Warm Espresso & Sand) ─────────────────────── */
-[data-theme="dark"] {
+html[data-theme="dark"] {
   /* Warm dark espresso ground — organic, deep, non-synthetic */
   --bg-primary: #151311;
   --bg-secondary: #1F1B18;
@@ -54,6 +54,7 @@
 }
 
 /* ── Light theme (Soft Porcelain & Terracotta) ──────────────── */
+:root,
 [data-theme="light"] {
   /* Exact #F2F1EF soft porcelain background */
   --bg-primary: #F2F1EF;

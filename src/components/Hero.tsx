@@ -218,15 +218,8 @@ export default function Hero() {
         >
           {/* Left Column: Bio & Core Actions */}
           <div>
-            <motion.div {...fadeUp(0)} style={{ marginBottom: "18px" }}>
-              <span className="status-pill">
-                <span className="status-dot" />
-                Available for SWE &amp; AI/ML Internships
-              </span>
-            </motion.div>
-
             <motion.h1
-              {...fadeUp(0.08)}
+              {...fadeUp(0.04)}
               style={{
                 fontSize: "clamp(2.8rem, 6.5vw, 5.2rem)",
                 fontWeight: 800,
